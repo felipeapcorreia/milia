@@ -63,6 +63,10 @@ module Milia
 
         tenant_id ||=  Thread.current[:tenant_id]   # Felipe
 
+        if !tenant_id
+          tenant_id ||=  session[:tenant_id]
+        end
+
         if tenant_id.nil?  # no arg; find automatically based on user
           tenant_id = @_my_tenants.first.id  # just pick the first one
         else   # validate the specified tenant_id before setup
